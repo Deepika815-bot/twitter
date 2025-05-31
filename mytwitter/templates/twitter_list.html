@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<h1 class="text-center text-white mt-3">welcome to our twitter</h1>
+<a class="btn btn-primary" href="{% url 'create_twitter' %}">create new tweet</a>
+<div class="container text-dark  row gap-3 mt-4">
+    {% for twitter in twitters %}
+    <div class="card" style="width:18rem;">
+        <img src="{{tweet.photo.url}}" class="card-img-top" alt="notfound"/>
+        <div class="card-body">
+            <h5 class="card-title">{{twitter.user.username}}</h5>
+            <p class="card-text">{{twitter.text}}</p>
+            {% if twitter.user == user %}
+            <a href="{% url 'edit_twitter'  %}" class="btn btn-primary">edit</a>
+            <a href="{% url 'delete_twitter' twitter.id %}" class="btn btn-danger">delete</a>
+            {% endif %}
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+  
+
+{% endblock %}
